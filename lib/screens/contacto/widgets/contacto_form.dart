@@ -54,11 +54,15 @@ class _ContactoFormState extends State<ContactoForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  const SizedBox(
+                    height: 12,
+                  ),
                   const Center(
                     child: CircleAvatar(
                       radius: 50,
                       backgroundImage:
                           AssetImage('assets/imagenes/avatar_user.png'),
+                      foregroundColor: Colors.red,
                     ),
                   ),
                   const Center(
@@ -253,11 +257,15 @@ class _ContactoFormState extends State<ContactoForm> {
     );
   }
 
-  callPhone(String num) async {
-    //todo
-    var phoneUri = Uri(scheme: 'tel', path: num);
-    if (await canLaunchUrl(phoneUri)) {
-      await launchUrl(phoneUri);
-    } else {}
+  callPhone(String phone) async {
+    Uri phoneno = Uri.parse('tel:$phone');
+    if(await canLaunchUrl(phoneno)){
+      print('si');
+      await launchUrl(phoneno);
+    }else {
+      print('no');
+    }
   }
+
+
 }

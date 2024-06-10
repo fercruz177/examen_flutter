@@ -1,7 +1,6 @@
 import 'package:examen_flutter/screens/anuncios/bloc/anuncios_cubit.dart';
 import 'package:examen_flutter/screens/anuncios/bloc/categorias_cubit.dart';
 import 'package:examen_flutter/screens/anuncios/widgets/anuncios_categorias_filter.dart';
-import 'package:examen_flutter/screens/anuncios/widgets/anuncios_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,17 +28,13 @@ class _AnunciosState extends State<Anuncios> {
             BlocProvider(create: (context) => sl<CategoriasCubit>())
           ],
           child: const Padding(
-            padding: EdgeInsets.all(8.0),//todo: definitar padding
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             child: Column(
               children: [
                 SizedBox(
                   height: 50,
                   child: AnunciosCategoriasFilter(),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                AnunciosSearchBar(),
                 SizedBox(
                   height: 10,
                 ),

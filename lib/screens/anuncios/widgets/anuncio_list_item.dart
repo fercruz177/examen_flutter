@@ -22,8 +22,8 @@ class AnuncioListItem extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                height: 70,
-                width: 70,
+                height: 75,
+                width: 75,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5.0),
                   child: Hero(
@@ -55,8 +55,12 @@ class AnuncioListItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Expanded(child: Text(anuncio.titulo)),
-                        Text('\$${anuncio.precio.toCurrencyFormat()}'),
+                        Expanded(child: Text(anuncio.titulo, style: TextStyle(
+                          fontSize: 16
+                        ),)),
+                        Text('\$${anuncio.precio.toCurrencyFormat()}', style: TextStyle(
+
+                        ),),
                       ],
                     ),
                     const SizedBox(height: 12),

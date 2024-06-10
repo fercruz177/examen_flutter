@@ -7,7 +7,8 @@ class AnunciosCategoriasFilter extends StatefulWidget {
   const AnunciosCategoriasFilter({super.key});
 
   @override
-  State<AnunciosCategoriasFilter> createState() => _AnunciosCategoriasFilterState();
+  State<AnunciosCategoriasFilter> createState() =>
+      _AnunciosCategoriasFilterState();
 }
 
 class _AnunciosCategoriasFilterState extends State<AnunciosCategoriasFilter> {
@@ -51,7 +52,7 @@ class _AnunciosCategoriasFilterState extends State<AnunciosCategoriasFilter> {
             },
           );
         } else {
-          return Container(color: Colors.red,);
+          return Container();
         }
       },
     );

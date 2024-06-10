@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:examen_flutter/models/api_response/categoria_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../models/api_response/anuncio_model.dart';
@@ -13,23 +10,30 @@ class AnunciosCubit extends Cubit<AnunciosState> {
 
   AnunciosCubit(AnunciosService service)
       : _service = service,
-        super(AnunciosLoading());
+        super(LoadingState());
 
-  consultaAnuncios() async {
-    emit(AnunciosLoading());
+  consultaAnuncios(String? busqueda, int pageKey, int paseSize) async {
+    emit(LoadingState());
     _anuncios = await _service.consultaAnuncios();
-    emit(AnunciosLoaded(_anuncios));
+    var busquedaClear = busqueda??''.trim().toLowerCase();
+
+    if(busquedaClear.isEmpty){
+      _anuncios = _anuncios.sublist(pageKey,pageKey+paseSize);
+      emit(SuccessState(_anuncios));
+    } else{
+      var resultadoBusqueda = _anuncios.where((element) {
+        return element.titulo.toLowerCase().contains(busquedaClear);
+      },).toList();
+      emit(SuccessState(resultadoBusqueda));
+    }
   }
 
   buscaAnuncios(String busqueda) async {
     var busquedaClear = busqueda.trim().toLowerCase();
     if(busquedaClear.isEmpty){
-      emit(AnunciosLoaded(_anuncios));
+      emit(SuccessState(_anuncios));
     } else {
-      var resultadoBusqueda = _anuncios.where((element) {
-        return element.titulo.toLowerCase().contains(busquedaClear);
-      },).toList();
-      emit(AnunciosLoaded(resultadoBusqueda));
+
     }
   }
 }

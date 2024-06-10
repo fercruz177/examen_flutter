@@ -30,7 +30,7 @@ class DetalleAnuncio extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      ImageCarousel(id),
+                      SizedBox(height:350, child: ImageCarousel(id)),
                       const SizedBox(
                         height: 30,
                       ),

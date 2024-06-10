@@ -1,13 +1,14 @@
-import 'package:examen_flutter/models/api_response/categoria_model.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../models/api_response/anuncio_model.dart';
 
-abstract class AnunciosState{}
+@immutable
+sealed class AnunciosState{}
 
-class AnunciosLoading extends AnunciosState{}
+final class LoadingState extends AnunciosState{}
 
-class AnunciosLoaded extends AnunciosState{
-  List<AnuncioModel> anuncios;
-  AnunciosLoaded(this.anuncios);
+final class SuccessState extends AnunciosState{
+  final List<AnuncioModel> anuncios;
+  SuccessState(this.anuncios);
 }
 
