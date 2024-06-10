@@ -28,13 +28,13 @@ class _AnunciosState extends State<Anuncios> {
             BlocProvider(create: (context) => sl<CategoriasCubit>())
           ],
           child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             child: Column(
               children: [
-                SizedBox(
+               /* SizedBox(
                   height: 50,
                   child: AnunciosCategoriasFilter(),
-                ),
+                ),*/
                 SizedBox(
                   height: 10,
                 ),

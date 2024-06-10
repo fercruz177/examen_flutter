@@ -25,19 +25,18 @@ class DetalleAnuncio extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             child: Column(
               children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(height:350, child: ImageCarousel(id)),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      const Info(),
-                    ],
-                  )),
-                ),
+                SingleChildScrollView(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height:350, child: ImageCarousel(id)),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Info(),
+                  ],
+                )),
+                const SizedBox(height: 24,),
                 BlocBuilder<DetalleCubit, DetalleState>(
                   builder: (context, state) {
                     return ElevatedButton(

@@ -52,7 +52,6 @@ class _ContactoFormState extends State<ContactoForm> {
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(
                     height: 12,
@@ -82,40 +81,45 @@ class _ContactoFormState extends State<ContactoForm> {
                   const SizedBox(
                     height: 12,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        callPhone('1234567890');
-                      },
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Número',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            callPhone('1234567890');
+                          },
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Número',
+                                  style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.onPrimary),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  '+52-5543-6348',
+                                  style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.onPrimary),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              '+52-5543-6348',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
@@ -184,6 +188,11 @@ class _ContactoFormState extends State<ContactoForm> {
                     height: 12,
                   ),
                   ElevatedButton(
+                    style: const ButtonStyle(
+                      padding: WidgetStatePropertyAll(
+                        EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                      ),
+                    ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         _contactoCubit.functionSendMail(_nombreController.text,
@@ -259,13 +268,8 @@ class _ContactoFormState extends State<ContactoForm> {
 
   callPhone(String phone) async {
     Uri phoneno = Uri.parse('tel:$phone');
-    if(await canLaunchUrl(phoneno)){
-      print('si');
+    if (await canLaunchUrl(phoneno)) {
       await launchUrl(phoneno);
-    }else {
-      print('no');
     }
   }
-
-
 }

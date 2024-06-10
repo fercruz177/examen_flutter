@@ -1,3 +1,4 @@
+import 'package:examen_flutter/models/api_response/categoria_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../models/api_response/anuncio_model.dart';
@@ -12,28 +13,48 @@ class AnunciosCubit extends Cubit<AnunciosState> {
       : _service = service,
         super(LoadingState());
 
-  consultaAnuncios(String? busqueda, int pageKey, int paseSize) async {
+  consultaAnuncios(List<String> categorias, String? busqueda, int pageKey, int paseSize) async {
     emit(LoadingState());
     _anuncios = await _service.consultaAnuncios();
-    var busquedaClear = busqueda??''.trim().toLowerCase();
-
-    if(busquedaClear.isEmpty){
-      _anuncios = _anuncios.sublist(pageKey,pageKey+paseSize);
+    if(categorias.isNotEmpty){
+      _anuncios = _anuncios.where(
+            (element) {
+          return categorias.contains(element.tipo);
+        },
+      ).toList();
       emit(SuccessState(_anuncios));
     } else{
-      var resultadoBusqueda = _anuncios.where((element) {
-        return element.titulo.toLowerCase().contains(busquedaClear);
-      },).toList();
-      emit(SuccessState(resultadoBusqueda));
+      var busquedaClear = busqueda ?? ''.trim().toLowerCase();
+
+      if (busquedaClear.isEmpty) {
+        _anuncios = _anuncios.sublist(pageKey, pageKey + paseSize);
+        emit(SuccessState(_anuncios));
+      } else {
+        var resultadoBusqueda = _anuncios.where(
+              (element) {
+            return element.titulo.toLowerCase().contains(busquedaClear);
+          },
+        ).toList();
+        emit(SuccessState(resultadoBusqueda));
+      }
     }
   }
 
-  buscaAnuncios(String busqueda) async {
-    var busquedaClear = busqueda.trim().toLowerCase();
-    if(busquedaClear.isEmpty){
+  filtraAnuncios(String busqueda, int pageKey, int paseSize) async {
+    emit(LoadingState());
+    _anuncios = await _service.consultaAnuncios();
+    var busquedaClear = busqueda ?? ''.trim().toLowerCase();
+
+    if (busquedaClear.isEmpty) {
+      _anuncios = _anuncios.sublist(pageKey, pageKey + paseSize);
       emit(SuccessState(_anuncios));
     } else {
-
+      var resultadoBusqueda = _anuncios.where(
+        (element) {
+          return element.tipo.toLowerCase().contains(busquedaClear);
+        },
+      ).toList();
+      emit(SuccessState(resultadoBusqueda));
     }
   }
 }

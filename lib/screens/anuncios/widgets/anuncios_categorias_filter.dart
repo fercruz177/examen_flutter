@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnunciosCategoriasFilter extends StatefulWidget {
-  const AnunciosCategoriasFilter({super.key});
+  final ValueChanged<List<String>>? onChange;
+
+  const AnunciosCategoriasFilter({this.onChange, super.key});
 
   @override
   State<AnunciosCategoriasFilter> createState() =>
@@ -43,6 +45,11 @@ class _AnunciosCategoriasFilterState extends State<AnunciosCategoriasFilter> {
                     } else {
                       filters.remove(categoria);
                     }
+                    widget.onChange?.call(filters
+                        .map(
+                          (e) => e.nombre,
+                        )
+                        .toList());
                   });
                 },
               );
