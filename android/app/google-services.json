@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "228833843457",
+    "project_id": "examenflutter-7e429",
+    "storage_bucket": "examenflutter-7e429.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228833843457:android:64349f1d6cdc1307ad6300",
+        "android_client_info": {
+          "package_name": "com.ferdinand.examen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV2LiFMEgSx7sxk7JTy0i-BspBpY2ipMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
