@@ -11,20 +11,18 @@ final myRouter = GoRouter(
       builder: (context, state) => const Anuncios(),
     ),
     GoRoute(
-      name: 'detalle',
-      path: '/detalle/:id',
-      builder: (context, state) {
-        final id = state.pathParameters["id"]!;
-        return DetalleAnuncio(id);
-      }
-    ),
+        name: 'detalle',
+        path: '/detalle/:id',
+        builder: (context, state) {
+          final id = state.pathParameters["id"]!;
+          return DetalleAnuncio(id);
+        }),
     GoRoute(
         name: 'contacto',
-        path: '/contacto/:nombre',
+        path: '/contacto/:id',
         builder: (context, state) {
-          final id = state.pathParameters["nombre"]!;
-          return const Contacto();
-        }
-    ),
+          final id = state.pathParameters["id"]!;
+          return Contacto(id);
+        }),
   ],
 );

@@ -25,7 +25,7 @@ void _initCore() {
   sl.registerFactory<AnunciosCubit>(() => AnunciosCubit(sl()));
   sl.registerFactory<CategoriasCubit>(() => CategoriasCubit(sl()));
   sl.registerFactory<DetalleCubit>(() => DetalleCubit(sl()));
-  sl.registerFactory<ContactoService>(() => ContactoService());
+  sl.registerFactory<ContactoService>(() => ContactoService(sl()));
   sl.registerFactory<ContactoCubit>(() => ContactoCubit(sl()));
 
 }

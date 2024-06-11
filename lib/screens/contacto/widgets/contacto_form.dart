@@ -25,6 +25,7 @@ class _ContactoFormState extends State<ContactoForm> {
     _correoController = TextEditingController();
     _textMailController = TextEditingController();
     _contactoCubit = context.read<ContactoCubit>();
+    _contactoCubit.consultaDatosContacto();
   }
 
   @override
@@ -58,17 +59,24 @@ class _ContactoFormState extends State<ContactoForm> {
                   ),
                   const Center(
                     child: CircleAvatar(
-                      radius: 50,
+                      radius: 65,
                       backgroundImage:
                           AssetImage('assets/imagenes/avatar_user.png'),
-                      foregroundColor: Colors.red,
                     ),
                   ),
-                  const Center(
-                      child: Text(
-                    'Jhon Smith',
-                    style: TextStyle(),
-                  )),
+                  BlocBuilder<ContactoCubit, ContactoState>(
+                    builder: (context, state) {
+                      var nombre = '';
+                      if (state is ContactoSucces) {
+                        nombre = state.contacto.nombre_vendedor;
+                      }
+                      return Center(
+                          child: Text(
+                        nombre,
+                        style: const TextStyle(),
+                      ));
+                    },
+                  ),
                   const Row(
                     children: [
                       Icon(Icons.phone),
@@ -89,34 +97,45 @@ class _ContactoFormState extends State<ContactoForm> {
                           color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: InkWell(
-                          onTap: () {
-                            callPhone('1234567890');
+                        child: BlocBuilder<ContactoCubit, ContactoState>(
+                          builder: (context, state) {
+                            var numero = '';
+                            if (state is ContactoSucces) {
+                              numero = state.contacto.telefono;
+                            }
+                            return InkWell(
+                              onTap: () {
+                                callPhone(
+                                    numero.replaceAll(RegExp(r'[^0-9]'), ''));
+                              },
+                              borderRadius: BorderRadius.circular(8),
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Número',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      numero,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
                           },
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Número',
-                                  style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.onPrimary),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  '+52-5543-6348',
-                                  style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.onPrimary),
-                                ),
-                              ],
-                            ),
-                          ),
                         ),
                       ),
                     ],

@@ -29,22 +29,24 @@ class DetalleAnuncio extends StatelessWidget {
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(height:350, child: ImageCarousel(id)),
+                    SizedBox(height: 350, child: ImageCarousel(id)),
                     const SizedBox(
                       height: 30,
                     ),
                     const Info(),
                   ],
                 )),
-                const SizedBox(height: 24,),
+                const SizedBox(
+                  height: 24,
+                ),
                 BlocBuilder<DetalleCubit, DetalleState>(
                   builder: (context, state) {
                     return ElevatedButton(
                       onPressed: (state is SuccessState)
                           ? () {
                               context.pushNamed('contacto', pathParameters: {
-                                'nombre': state.anuncio.titulo
-                              }); //todo
+                                'id': state.anuncio.id
+                              });
                             }
                           : null,
                       style: const ButtonStyle(
