@@ -6,6 +6,7 @@ import 'package:examen_flutter/core/service_locator.dart' as sl;
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
 
+import 'core/AppColorsTheme.dart';
 import 'core/router.dart';
 
 void main() async {
@@ -27,7 +28,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: theme,
+      theme: theme.copyWith(
+        extensions: [
+          AppColorsTheme.light(),
+        ],
+      ),
       routerConfig: myRouter,
     );
   }

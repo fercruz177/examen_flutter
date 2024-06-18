@@ -23,42 +23,43 @@ class DetalleAnuncio extends StatelessWidget {
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: 350, child: ImageCarousel(id)),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Info(),
-                  ],
-                )),
-                const SizedBox(
-                  height: 24,
-                ),
-                BlocBuilder<DetalleCubit, DetalleState>(
-                  builder: (context, state) {
-                    return ElevatedButton(
-                      onPressed: (state is SuccessState)
-                          ? () {
-                              context.pushNamed('contacto', pathParameters: {
-                                'id': state.anuncio.id
-                              });
-                            }
-                          : null,
-                      style: const ButtonStyle(
-                        padding: WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                  SizedBox(height: 350, child: ImageCarousel(id)),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Info(),
+                                      ],
+                                    ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  BlocBuilder<DetalleCubit, DetalleState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: (state is SuccessState)
+                            ? () {
+                                context.pushNamed('contacto', pathParameters: {
+                                  'id': state.anuncio.id
+                                });
+                              }
+                            : null,
+                        style: const ButtonStyle(
+                          padding: WidgetStatePropertyAll(
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                          ),
                         ),
-                      ),
-                      child: const Text('Contactar Vendedor'),
-                    );
-                  },
-                )
-              ],
+                        child: const Text('Contactar Vendedor'),
+                      );
+                    },
+                  )
+                ],
+              ),
             ),
           )),
     );

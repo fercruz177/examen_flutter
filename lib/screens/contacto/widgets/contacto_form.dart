@@ -57,13 +57,25 @@ class _ContactoFormState extends State<ContactoForm> {
                   const SizedBox(
                     height: 12,
                   ),
-                  const Center(
-                    child: CircleAvatar(
-                      radius: 65,
-                      backgroundImage:
-                          AssetImage('assets/imagenes/avatar_user.png'),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary,
+                        width: 2,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Center(
+                      child: CircleAvatar(
+                        radius: 65,
+                        backgroundImage:
+                            AssetImage('assets/imagenes/avatar_user.png'),
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 8,),
                   BlocBuilder<ContactoCubit, ContactoState>(
                     builder: (context, state) {
                       var nombre = '';
@@ -73,7 +85,9 @@ class _ContactoFormState extends State<ContactoForm> {
                       return Center(
                           child: Text(
                         nombre,
-                        style: const TextStyle(),
+                        style: const TextStyle(
+                          fontSize: 18
+                        ),
                       ));
                     },
                   ),
